@@ -1,0 +1,109 @@
+brlaser (6-3) UNRELEASED; urgency=medium
+
+  * update
+
+ -- Debian Printing Team <debian-printing@lists.debian.org>  Thu, 12 May 2022 10:52:54 +0800
+
+brlaser (6-3) unstable; urgency=medium
+
+  * debian/control: add myself to Uploaders:
+  * debian/control: add Rules-Requires-Root:
+  * fix printing of documents with images (Closes: #999584, #1004133)
+    cherry picked from upstream 9d7ddda8383bfc4d205b5e1b49de2b8bcd9137f1
+
+ -- Thorsten Alteholz <debian@alteholz.de>  Sat, 02 Apr 2022 17:03:02 +0200
+
+brlaser (6-2) unstable; urgency=medium
+
+  * Remove myself from Uploaders
+  * Run wrap-and-sort -baskt
+  * Update watch file format version to 4
+  * Bump debhelper from old 12 to 13
+  * Set upstream metadata fields
+  * Remove listed license files (COPYING) from copyright
+  * Add Salsa CI configuration
+  * S-V: Update to 4.6.0 without changes needed
+
+ -- Didier Raboud <odyx@debian.org>  Wed, 01 Sep 2021 16:37:48 +0200
+
+brlaser (6-1) unstable; urgency=medium
+
+  * New upstream release
+  * Set upstream metadata fields: Repository.
+
+ -- Didier Raboud <odyx@debian.org>  Mon, 30 Sep 2019 20:35:40 +0200
+
+brlaser (5-1) unstable; urgency=medium
+
+  * New upstream release
+
+  * Use secure copyright file specification URI.
+  * Bump debhelper from old 11 to 12.
+  * Bump S-V to 4.4 without changes needed
+  * Refresh package description to list the currently supported printers
+  * Tiny fixup in the d/copyright file
+
+ -- Didier Raboud <odyx@debian.org>  Thu, 05 Sep 2019 09:48:23 +0200
+
+brlaser (4-1) unstable; urgency=medium
+
+  * New upstream release
+    - Build system changed to CMake
+
+  * Packaging cleanup:
+    - Bump debhelper compat to 11
+    - Update packaging to cmake build system
+    - Install README.md as doc
+    - Cleanup the superfluous Testsuite control field
+    - Refresh d/copyright
+    - Enable hardening
+
+ -- Didier Raboud <odyx@debian.org>  Fri, 02 Mar 2018 08:08:59 +0100
+
+brlaser (3-6) unstable; urgency=medium
+
+  * Update debian/control syntax with cme
+  * Bump Standards-Version to 4.1.3 without changes needed
+  * Update Vcs-* fields for the move to salsa.d.o
+  * Initialize git-dpm
+
+ -- Didier Raboud <odyx@debian.org>  Fri, 09 Feb 2018 17:10:46 +0100
+
+brlaser (3-5) unstable; urgency=medium
+
+  [ Peter Spiess-Knafl ]
+  * Add patch to add missing #include <string> (Closes: #822500)
+
+  [ Didier Raboud ]
+  * Bump S-V to 3.9.8 without changes needed
+  * Add debian/gbp.conf to cope with the new git branches
+
+ -- Didier Raboud <odyx@debian.org>  Mon, 25 Apr 2016 21:28:24 +0200
+
+brlaser (3-4) unstable; urgency=medium
+
+  * Import upstream patch to add support for Brother DCP-7055
+  * Bump Standards-Version to 3.9.7 without changes needed
+
+ -- Didier Raboud <odyx@debian.org>  Thu, 25 Feb 2016 19:39:14 +0100
+
+brlaser (3-3) unstable; urgency=medium
+
+  * Drop superfluous pyppd build-dependency
+  * Make build commands verbose through autotools' V=1
+
+ -- Didier Raboud <odyx@debian.org>  Wed, 09 Jul 2014 08:46:51 +0200
+
+brlaser (3-2) unstable; urgency=medium
+
+  * Correct package description
+  * Override dh_auto_configure with a proper --docdir to put the README.md in
+    the correct path
+
+ -- Didier Raboud <odyx@debian.org>  Tue, 08 Jul 2014 23:56:50 +0200
+
+brlaser (3-1) unstable; urgency=medium
+
+  * Initial upload to Debian (Closes: #753520)
+
+ -- Didier Raboud <odyx@debian.org>  Tue, 08 Jul 2014 09:32:27 +0200

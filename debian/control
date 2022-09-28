@@ -1,0 +1,51 @@
+Source: brlaser
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Uploaders: Thorsten Alteholz <debian@alteholz.de>
+Section: text
+Priority: optional
+Build-Depends:
+ cmake,
+ debhelper-compat (= 13),
+ libcups2-dev,
+ libcupsimage2-dev,
+Standards-Version: 4.6.0
+Vcs-Browser: https://salsa.debian.org/printing-team/brlaser
+Vcs-Git: https://salsa.debian.org/printing-team/brlaser.git
+Homepage: https://github.com/pdewacht/brlaser
+Rules-Requires-Root: no
+
+Package: printer-driver-brlaser
+Architecture: any
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: printer driver for (some) Brother laser printers
+ CUPS filter driver supporting (some) Brother laser printer.
+ .
+ This driver has been reported to work with these printers:
+ .
+  * Brother DCP-1510
+  * Brother DCP-1602
+  * Brother DCP-7030
+  * Brother DCP-7040
+  * Brother DCP-7055
+  * Brother DCP-7055W
+  * Brother DCP-7060D
+  * Brother DCP-7065DN
+  * Brother DCP-7080
+  * Brother DCP-L2500D
+  * Brother DCP-L2540DW
+  * Brother HL-1110 series
+  * Brother HL-1200 series
+  * Brother HL-L2300D series
+  * Brother HL-L2320D series
+  * Brother HL-L2340D series
+  * Brother HL-L2360D series
+  * Brother MFC-1910W
+  * Brother MFC-7240
+  * Brother MFC-7360N
+  * Brother MFC-7365DN
+  * Brother MFC-7840W
+  * Brother MFC-L2710DW
+  * Lenovo M7605D
+ This package contains the CUPS filter driver for the supported laser printers.

@@ -1,0 +1,93 @@
+From: Thorsten Alteholz <debian@alteholz.de>
+Date: Sat, 2 Apr 2022 17:43:55 +0200
+Subject: fix printing of documents with images
+
+---
+ src/block.h        |  5 +----
+ src/job.cc         | 18 +++++++++++++-----
+ test/test_block.cc | 10 ----------
+ 3 files changed, 14 insertions(+), 19 deletions(-)
+
+diff --git a/src/block.h b/src/block.h
+index e5dbd8d..1a6b6c6 100644
+--- a/src/block.h
++++ b/src/block.h
+@@ -25,7 +25,6 @@
+ class block {
+  public:
+   block(): line_bytes_(0) {
+-    lines_.reserve(max_lines_per_block_);
+   }
+ 
+   bool empty() const {
+@@ -40,8 +39,7 @@ class block {
+   }
+ 
+   bool line_fits(unsigned size) {
+-    return lines_.size() != max_lines_per_block_
+-      && line_bytes_ + size < max_block_size_;
++    return line_bytes_ + size < max_block_size_;
+   }
+ 
+   void flush(FILE *f) {
+@@ -59,7 +57,6 @@ class block {
+ 
+  private:
+   static const unsigned max_block_size_ = 16350;
+-  static const unsigned max_lines_per_block_ = 64;
+ 
+   std::vector<std::vector<uint8_t>> lines_;
+   int line_bytes_;
+diff --git a/src/job.cc b/src/job.cc
+index 6f088ae..c328c67 100644
+--- a/src/job.cc
++++ b/src/job.cc
+@@ -103,14 +103,22 @@ void job::encode_page(const page_params &page_params,
+ 
+   fputs("\033*b1030m", out_);
+ 
++  // XXX brother driver uses 128 lines per band
++  const int lines_per_band = 64;
++
+   for (int i = 1; i < lines && nextline(line); ++i) {
+-    std::vector<uint8_t> encoded = encode_line(line, reference);
+-    if (block.line_fits(encoded.size())) {
+-      block.add_line(std::move(encoded));
+-    } else {
++    std::vector<uint8_t> encoded;
++    if (i % lines_per_band == 0) {
+       block.flush(out_);
+-      block.add_line(encode_line(line));
++      encoded = encode_line(line);
++    } else {
++      encoded = encode_line(line, reference);
++      if (!block.line_fits(encoded.size())) {
++        block.flush(out_);
++        encoded = encode_line(line);
++      }
+     }
++    block.add_line(std::move(encoded));
+     std::swap(line, reference);
+   }
+ 
+diff --git a/test/test_block.cc b/test/test_block.cc
+index c476ee7..05642cf 100644
+--- a/test/test_block.cc
++++ b/test/test_block.cc
+@@ -37,16 +37,6 @@ const lest::test specification[] = {
+     EXPECT(!b.empty());
+   },
+ 
+-  "A block can contain 64 lines",
+-  [] {
+-    block b;
+-    for (int i = 0; i < 64; ++i) {
+-      EXPECT(b.line_fits(1));
+-      b.add_line(vec(1));
+-    }
+-    EXPECT(!b.line_fits(1));
+-  },
+-
+   "A block has a size limit of about 16 kilobyte",
+   [] {
+     block b;
