@@ -1,8 +1,12 @@
-brlaser (6-3) UNRELEASED; urgency=medium
+brlaser (6-3deepin0) unstable; urgency=medium
 
+  [ Debian Printing Team ]
   * update
 
- -- Debian Printing Team <debian-printing@lists.debian.org>  Thu, 12 May 2022 10:52:54 +0800
+  [ Tianyu Chen ]
+  * No source change upload against GCC 12.
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Thu, 19 Sep 2024 22:43:00 +0800
 
 brlaser (6-3) unstable; urgency=medium
 
